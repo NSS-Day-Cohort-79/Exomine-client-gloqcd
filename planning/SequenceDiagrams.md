@@ -191,7 +191,7 @@ Title: Buy-Button
     main.js->>buyButton.js: Call handlePurchase()
     buyButton.js->>transientState.js: Read selections (governor, facility, mineral)
     buyButton.js->>API: PUT request to update colonies
-    API->>DB: Update Bought_Minerals table
+    API->>DB: Update Colony_Minerals table
     DB-->>API: Confirm update
     buyButton.js->>API: PUT request to update mining facility
     API->>DB: Update Mined_Minerals table
