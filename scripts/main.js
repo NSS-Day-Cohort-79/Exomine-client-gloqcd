@@ -29,7 +29,7 @@ const render = async () => {
     const facilityId = e.target.value
     setFacility(facilityId)
   })
-  
+
   // Listen for state changes and update colonies display
   document.addEventListener("stateChanged", () => {
     console.log("stateChanged event fired!")
