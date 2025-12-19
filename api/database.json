@@ -109,19 +109,5 @@
     { "id": 47, "miningFacilityId": 10, "mineralId": 5, "quantityAvailable": 423 },
     { "id": 48, "miningFacilityId": 10, "mineralId": 11, "quantityAvailable": 267 },
     { "id": 49, "miningFacilityId": 10, "mineralId": 20, "quantityAvailable": 134 }
-  ],
-"colonyMinerals": [
-    { "id": 1, "colonyId": 1, "mineralId": 1, "quantity": 150 },
-    { "id": 2, "colonyId": 1, "mineralId": 5, "quantity": 87 },
-    { "id": 3, "colonyId": 1, "mineralId": 9, "quantity": 45 },
-    { "id": 4, "colonyId": 2, "mineralId": 2, "quantity": 200 },
-    { "id": 5, "colonyId": 2, "mineralId": 8, "quantity": 120 },
-    { "id": 6, "colonyId": 3, "mineralId": 3, "quantity": 175 },
-    { "id": 7, "colonyId": 3, "mineralId": 7, "quantity": 95 },
-    { "id": 8, "colonyId": 6, "mineralId": 16, "quantity": 125 },
-    { "id": 9, "colonyId": 6, "mineralId": 17, "quantity": 82 },
-    { "id": 10, "colonyId": 8, "mineralId": 1, "quantity": 160 },
-    { "id": 11, "colonyId": 8, "mineralId": 2, "quantity": 75 }
-  ]
-}
+  ]}
   
