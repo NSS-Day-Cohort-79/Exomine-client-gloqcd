@@ -109,5 +109,6 @@
     { "id": 47, "miningFacilityId": 10, "mineralId": 5, "quantityAvailable": 423 },
     { "id": 48, "miningFacilityId": 10, "mineralId": 11, "quantityAvailable": 267 },
     { "id": 49, "miningFacilityId": 10, "mineralId": 20, "quantityAvailable": 134 }
-  ]}
+  ]
+}
   
