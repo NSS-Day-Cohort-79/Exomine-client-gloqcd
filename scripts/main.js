@@ -1,9 +1,11 @@
 import { governorChoices } from "./Governors.js"
 import { facilityChoices } from "./miningFacilites.js"
+import { handleColoniesChange } from "./colonies.js"
 
 import { setGovernor, setFacility } from "./TransientState.js"
-facilityChoices
+
 const container = document.querySelector("#container")
+const selectionsContainer = document.querySelector("#selections-container")
 console.log("Container:", container)
 
 const render = async () => {
@@ -11,15 +13,13 @@ const render = async () => {
   const governorHTML = await governorChoices()
   const facilityHTML = await facilityChoices()
   
-  // Combine both dropdowns into the page
-  container.innerHTML = governorHTML + facilityHTML
-  console.log("Container after insert:", container.innerHTML)
+  // Put dropdowns in the selections container
+  selectionsContainer.innerHTML = governorHTML + facilityHTML
 
   // Add event listener for governor dropdown
   const governorSelect = document.querySelector("#governor-dropdown")
   governorSelect.addEventListener("change", (e) => {
-    const governorId = e.target.value
-    console.log("Selected governor:", governorId)
+    const governorId = Number(e.target.value)
     setGovernor(governorId)
   })
 
@@ -27,8 +27,13 @@ const render = async () => {
   const facilitySelect = document.querySelector("#facility")
   facilitySelect.addEventListener("change", (e) => {
     const facilityId = e.target.value
-    console.log("Selected facility:", facilityId)
     setFacility(facilityId)
+  })
+  
+  // Listen for state changes and update colonies display
+  document.addEventListener("stateChanged", () => {
+    console.log("stateChanged event fired!")
+    handleColoniesChange()
   })
 }
 
