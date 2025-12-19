@@ -1,25 +1,35 @@
+import { governorChoices } from "./Governors.js"
 import { facilityChoices } from "./miningFacilites.js"
 
-///import { facilityChoices } from "./miningFacilities.js"
-
+import { setGovernor, setFacility } from "./TransientState.js"
+facilityChoices
 const container = document.querySelector("#container")
 console.log("Container:", container)
 
 const render = async () => {
-    // Get the HTML select dropdown
-    const facilityHTML = await facilityChoices()
-    
-    container.innerHTML = facilityHTML
-    console.log("Container after insert:", container.innerHTML)
+  // Get the HTML select dropdowns
+  const governorHTML = await governorChoices()
+  const facilityHTML = await facilityChoices()
+  
+  // Combine both dropdowns into the page
+  container.innerHTML = governorHTML + facilityHTML
+  console.log("Container after insert:", container.innerHTML)
 
-    
-    // Add event listener to the select
-    const selectElement = document.querySelector("#facility")
-    selectElement.addEventListener("change", (e) => {
-        const facilityId = e.target.value
-        console.log("Selected facility:", facilityId)
-        // Handle facility selection 
-    })
+  // Add event listener for governor dropdown
+  const governorSelect = document.querySelector("#governor-dropdown")
+  governorSelect.addEventListener("change", (e) => {
+    const governorId = e.target.value
+    console.log("Selected governor:", governorId)
+    setGovernor(governorId)
+  })
+
+  // Add event listener for facility dropdown
+  const facilitySelect = document.querySelector("#facility")
+  facilitySelect.addEventListener("change", (e) => {
+    const facilityId = e.target.value
+    console.log("Selected facility:", facilityId)
+    setFacility(facilityId)
+  })
 }
 
 // Initial call
