@@ -1,0 +1,43 @@
+Table Governors {
+    id int [pk]
+    name varchar
+    active boolean
+    colony_id int [ref: > Colonies.id]
+}
+
+Table Colonies {
+    id int [pk] 
+    name varchar  
+}
+
+Table Minerals {
+    id int [pk] 
+    name varchar   
+}
+
+Table Mining_Facility {
+    id int [pk]
+    name varchar 
+    location varchar
+    active boolean
+}
+
+Table Colony_Minerals {
+    id int [pk]
+    colony_id int [ref: > Colonies.id]
+    mineral_id int [ref: > Minerals.id]
+    quantity int  
+}
+
+Table Facility_Minerals {
+    id int [pk]
+    mining_facility_id int [ref: > Mining_Facility.id]
+    mineral_id int [ref: > Minerals.id]
+    quantity_per_type int
+}
+
+// 1 Governor can not govern more than 1 colony 
+// One colony can have one or many governors
+
+//Mining_Facility are NOT on the planets with colonies 
+// Plants can access many Mining_Facilities 
