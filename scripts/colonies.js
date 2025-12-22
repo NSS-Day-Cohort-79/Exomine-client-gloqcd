@@ -42,7 +42,5 @@ export const handleColoniesChange = async () => {
         </div>
     `
     
-    // Updates the DOM with the generated HTML
-    const colonyContainer = document.getElementById('colony-container')
-    colonyContainer.innerHTML = colonyHTML
+    return colonyHTML
 }
