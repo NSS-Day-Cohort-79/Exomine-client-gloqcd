@@ -16,15 +16,14 @@ const render = async () => {
   const governorHTML = await governorChoices()
   const facilityHTML = await facilityChoices()
   const facilityMineralsHTML = await handleMineralsChange()
+  const shoppingCartHTML = await handleShoppingCartChange()
   
   
   // Put dropdowns in the selections container
   selectionsContainer.innerHTML = governorHTML + facilityHTML
   facilityMineralsContainer.innerHTML = facilityMineralsHTML
-  
-  // Initialize shopping cart as empty
-  shoppingCartContainer.innerHTML = `<div class="shopping-cart"><h3>Space Cart</h3></div>`
-  
+  shoppingCartContainer.innerHTML = shoppingCartHTML
+
   // Add event listener for governor dropdown
   const governorSelect = document.querySelector("#governor-dropdown")
   governorSelect.addEventListener("change", (e) => {
