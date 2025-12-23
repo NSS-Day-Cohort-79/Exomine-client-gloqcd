@@ -1,27 +1,29 @@
 import { governorChoices } from "./Governors.js"
-import { facilityChoices } from "./miningFacilites.js"
+import { facilityChoices } from "./miningFacilities.js"
 import { handleColoniesChange } from "./colonies.js"
 import { handleMineralsChange } from "./minerals.js"
 import { handleShoppingCartChange } from "./shoppingCart.js"
-import { setGovernor, setFacility,  } from "./TransientState.js"
+import { setGovernor, setFacility, setFacilityMineral } from "./TransientState.js"
 
-const container = document.querySelector("#container")
 const selectionsContainer = document.querySelector("#selections-container")
 const colonyContainer = document.querySelector("#colony-container")
 const facilityMineralsContainer = document.querySelector("#facility-minerals")
 const shoppingCartContainer = document.querySelector("#shopping-cart")
-console.log("Container:", container)
+
 
 const render = async () => {
   // Get the HTML select dropdowns
   const governorHTML = await governorChoices()
   const facilityHTML = await facilityChoices()
   const facilityMineralsHTML = await handleMineralsChange()
-  const shoppingCartHTML = await handleShoppingCartChange()
+  
   // Put dropdowns in the selections container
   selectionsContainer.innerHTML = governorHTML + facilityHTML
   facilityMineralsContainer.innerHTML = facilityMineralsHTML
-  shoppingCartContainer.innerHTML = shoppingCartHTML
+  
+  // Initialize shopping cart as empty
+  shoppingCartContainer.innerHTML = `<div class="shopping-cart"><h3>Space Cart</h3></div>`
+  
   // Add event listener for governor dropdown
   const governorSelect = document.querySelector("#governor-dropdown")
   governorSelect.addEventListener("change", (e) => {
@@ -36,6 +38,15 @@ const render = async () => {
     setFacility(facilityId)
   })
 
+// Add event listeners for mineral radio buttons
+  const mineralRadios = document.querySelectorAll('input[name="mineral"]')
+  mineralRadios.forEach(radio => {
+    radio.addEventListener("change", (e) => {
+      const facilityMineralId = Number(e.target.value)
+      setFacilityMineral(facilityMineralId)
+    })
+  })
+
   // Listen for state changes and update colonies display
   document.addEventListener("stateChanged", async () => {
     console.log("stateChanged event fired!")
@@ -44,8 +55,22 @@ const render = async () => {
 
     colonyContainer.innerHTML = colonyHTML
     facilityMineralsContainer.innerHTML = mineralsHTML
-  })
+
+    // Re-attach event listeners for mineral radio buttons after minerals update
+    const newMineralRadios = document.querySelectorAll('input[name="mineral"]')
+    newMineralRadios.forEach(radio => {
+      radio.addEventListener("change", (e) => {
+        const facilityMineralId = Number(e.target.value)
+        setFacilityMineral(facilityMineralId)
+      })
+    })
+    // Update shopping cart when state changes (mineral selected)
+ const shoppingCartHTML = await handleShoppingCartChange()
+ if (shoppingCartHTML) {
+ shoppingCartContainer.innerHTML = shoppingCartHTML
+ }
+})
 }
 
-// Initial call
+ // Initial call
 render()

@@ -1,7 +1,8 @@
 const transientState = {
     governorId: null,
     facilityId: null,
-    facilityMineralId: null, 
+    facilityMineralId: null,
+    cart:[] 
 }
 
 export const setGovernor = (governorId) => {
