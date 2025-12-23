@@ -17,6 +17,7 @@ const render = async () => {
   const facilityHTML = await facilityChoices()
   const facilityMineralsHTML = await handleMineralsChange()
   
+  
   // Put dropdowns in the selections container
   selectionsContainer.innerHTML = governorHTML + facilityHTML
   facilityMineralsContainer.innerHTML = facilityMineralsHTML
@@ -35,6 +36,7 @@ const render = async () => {
   const facilitySelect = document.querySelector("#facility")
   facilitySelect.addEventListener("change", (e) => {
     const facilityId = Number(e.target.value)
+    
     setFacility(facilityId)
   })
 
@@ -48,6 +50,7 @@ const render = async () => {
   })
 
   // Listen for state changes and update colonies display
+  document.addEventListener("stateChanged", async () => {
   document.addEventListener("stateChanged", async () => {
     console.log("stateChanged event fired!")
     const colonyHTML = await handleColoniesChange()
@@ -68,9 +71,9 @@ const render = async () => {
  const shoppingCartHTML = await handleShoppingCartChange()
  if (shoppingCartHTML) {
  shoppingCartContainer.innerHTML = shoppingCartHTML
- }
+  }
+})
 })
 }
-
  // Initial call
 render()
