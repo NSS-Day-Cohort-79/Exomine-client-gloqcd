@@ -3,14 +3,20 @@
 // Depends on: TransientState.js
 
 import { getFacilityMineral } from "./TransientState.js"
+import { buyButton } from "./buyButton.js"
 
 export const handleShoppingCartChange = async () => {
   // Step 1: Read the selected facility mineral ID from transientState
   const facilityMineralId = getFacilityMineral()
+  // Read buyButton from buyButton.js
+  const buyButtonHTML = buyButton()
   
   // Step 2: If no facility mineral selected, return blank HTML
   if (!facilityMineralId) {
-    return ""
+    return `<div class="shopping-cart">
+      <h3>Space Cart</h3>
+      <div>${buyButtonHTML}</div>
+    </div>`
   }
   
   // Step 3: Fetch facility minerals to find the selected one
@@ -35,6 +41,7 @@ export const handleShoppingCartChange = async () => {
    <div class="cart-summary">
    <p><strong>Quantity:</strong> 1 ton</p>
    </div>
+   <div>${buyButtonHTML}</div>
    </div>`
   
   // Step 7: Return the HTML to be displayed in main.js
