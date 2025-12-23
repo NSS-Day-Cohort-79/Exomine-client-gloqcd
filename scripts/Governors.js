@@ -1,5 +1,3 @@
-import { setGovernor } from "./TransientState.js"
-
 // Function to fetch governors and generate dropdown HTML
 export const governorChoices = async () => {
   // Step 1: Make the API request
@@ -8,12 +6,17 @@ export const governorChoices = async () => {
   // Step 2: Convert the response to JSON (JavaScript object)
   const governors = await response.json()
   
+  //Filter to only active governors 
+  const activeGovernors = governors.filter(governor => governor.status === "active")
+ 
   // Step 3: Create the dropdown HTML string
   let dropdownHTML = `<select id="governor-dropdown">`
   dropdownHTML += `<option value="">Select a Governor</option>`
+
+  
   
   // Step 4: Loop through each governor and add it to the HTML
-  governors.forEach((governor) => {
+  activeGovernors.forEach((governor) => {
     const fullName = `${governor.firstName} ${governor.lastName}`
     dropdownHTML += `<option value="${governor.id}" data-governor-id="${governor.id}">
       ${fullName}
