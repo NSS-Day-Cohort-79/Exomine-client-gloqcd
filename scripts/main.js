@@ -3,7 +3,7 @@ import { facilityChoices } from "./miningFacilities.js"
 import { handleColoniesChange } from "./colonies.js"
 import { handleMineralsChange } from "./minerals.js"
 import { handleShoppingCartChange } from "./shoppingCart.js"
-import { setGovernor, setFacility, setFacilityMineral } from "./TransientState.js"
+import { setGovernor, setFacility, setFacilityMineral, purchaseMineral } from "./TransientState.js"
 
 const selectionsContainer = document.querySelector("#selections-container")
 const colonyContainer = document.querySelector("#colony-container")
@@ -28,15 +28,36 @@ const render = async () => {
   const governorSelect = document.querySelector("#governor-dropdown")
   governorSelect.addEventListener("change", (e) => {
     const governorId = Number(e.target.value)
+
+    if (e.target.value === "") {
+      //They selected "Choose a Governor"
+      //Clear everything
+      setGovernor(null)
+      colonyContainer.innerHTML = ""
+      const emptyMineralHTML = facilityMineralsHTML
+      facilityMineralsContainer.innerHTML = emptyMineralHTML
+      const emptyCartHTML = shoppingCartHTML
+      shoppingCartContainer.innerHTML = emptyCartHTML
+    } else {
     setGovernor(governorId)
+    }
   })
 
   // Add event listener for facility dropdown
   const facilitySelect = document.querySelector("#facility")
   facilitySelect.addEventListener("change", (e) => {
     const facilityId = Number(e.target.value)
+
+     if (e.target.value === "") {
+      //They selected "Choose a facility"
+      //Clear shopping cart and minerals
+      setFacility(null)
+      facilityMineralsContainer.innerHTML = `<div class="facility-minerals"><h2>Minerals at Facility</h2><ul></ul></div>`
+      shoppingCartContainer.innerHTML = `<div class="shopping-cart"><h3>Space Cart</h3></div>`
+    } else {
     
     setFacility(facilityId)
+    }
   })
 
 // Add event listeners for mineral radio buttons
@@ -49,7 +70,6 @@ const render = async () => {
   })
 
   // Listen for state changes and update colonies display
-  document.addEventListener("stateChanged", async () => {
   document.addEventListener("stateChanged", async () => {
     console.log("stateChanged event fired!")
     const colonyHTML = await handleColoniesChange()
@@ -71,7 +91,12 @@ const render = async () => {
  if (shoppingCartHTML) {
  shoppingCartContainer.innerHTML = shoppingCartHTML
   }
-})
+const purchaseButton = document.querySelector(".buy-button")
+  if (purchaseButton) {
+    purchaseButton.addEventListener("click", async () => {
+      await purchaseMineral()
+    })
+  }
 })
 }
  // Initial call
