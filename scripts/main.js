@@ -17,6 +17,8 @@ const render = async () => {
   const facilityHTML = await facilityChoices()
   const facilityMineralsHTML = await handleMineralsChange()
   const shoppingCartHTML = await handleShoppingCartChange()
+  const colonyHTML = await handleColoniesChange()
+  colonyContainer.innerHTML = colonyHTML
   
   
   // Put dropdowns in the selections container

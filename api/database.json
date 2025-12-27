@@ -458,7 +458,7 @@
       "id": 28,
       "miningFacilityId": 6,
       "mineralId": 9,
-      "quantityAvailable": 124
+      "quantityAvailable": 123
     },
     {
       "id": 29,
@@ -488,7 +488,7 @@
       "id": 33,
       "miningFacilityId": 7,
       "mineralId": 10,
-      "quantityAvailable": 167
+      "quantityAvailable": 166
     },
     {
       "id": 34,
@@ -659,6 +659,18 @@
       "mineralId": 5,
       "quantity": 1,
       "id": 12
+    },
+    {
+      "colonyId": 2,
+      "mineralId": 9,
+      "quantity": 1,
+      "id": 13
+    },
+    {
+      "colonyId": 2,
+      "mineralId": 10,
+      "quantity": 1,
+      "id": 14
     }
   ]
 }

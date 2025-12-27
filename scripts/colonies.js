@@ -7,7 +7,11 @@ export const handleColoniesChange = async () => {
     // Check if a governor is actually selected
     if (!selectedGovernorId) {
         //return empty string if no governor selected
-        return ""
+        return `
+        <div class="colony-card">
+            <h2>Colony</h2>
+        </div>
+        `
     }
     //Fetches the governor's colony_id from the Governors endpoint 
     const governorsResponse = await fetch("http://localhost:8088/governors")
