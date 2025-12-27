@@ -4,6 +4,15 @@ export const handleColoniesChange = async () => {
     //reads selected governor Id from transientState
     const selectedGovernorId = getGovernor()
     
+    // Check if a governor is actually selected
+    if (!selectedGovernorId) {
+        //return empty string if no governor selected
+        return `
+        <div class="colony-card">
+            <h2>Colony</h2>
+        </div>
+        `
+    }
     //Fetches the governor's colony_id from the Governors endpoint 
     const governorsResponse = await fetch("http://localhost:8088/governors")
     const governors = await governorsResponse.json()
@@ -42,7 +51,5 @@ export const handleColoniesChange = async () => {
         </div>
     `
     
-    // Updates the DOM with the generated HTML
-    const colonyContainer = document.getElementById('colony-container')
-    colonyContainer.innerHTML = colonyHTML
+    return colonyHTML
 }
